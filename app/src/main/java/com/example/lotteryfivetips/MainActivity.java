@@ -12,13 +12,12 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    // GUI controls
-    private TextView tvResult;
-    private TextView tvValidation;
-
     // Constants
     static final int MAX_TIPS = 5;
     static final int LOTTO_NUMBERS = 6;
+    // GUI controls
+    private TextView tvResult;
+    private TextView tvValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,31 +75,24 @@ public class MainActivity extends AppCompatActivity {
     // Check for duplicates (within one tip and for whole tips)
     private boolean validationCheck(int[][] numbers) {
         boolean valid = true;   // Initial setting
-
-        // Check for duplicates within a tip
+        // Check for duplicate numbers within a tip
         for (int tip = 0; tip < MAX_TIPS; tip++) {
             for (int i = 0; i < LOTTO_NUMBERS; i++) {
                 for (int j = i + 1; j < LOTTO_NUMBERS; j++) {
                     if (numbers[tip][i] == numbers[tip][j]) {
-                        valid = false;  // Got a duplicate element in a tip
-                        break;
+                        return false;  // Got a duplicate element within a tip
                     }
                 }
             }
         }
-
-        if (!valid)
-            return valid;      // We can stop because it is not valid
-
         // Check for duplicate tips
         for (int tip = 0; tip < MAX_TIPS; tip++) {
             for (int i = tip + 1; i < MAX_TIPS; i++) {
                 if (Arrays.equals(numbers[tip], numbers[i])) {
-                    valid = false;  // Got two duplicate tips
-                    break;
+                    return false;  // Got two duplicate tips
                 }
             }
         }
-        return valid;
+        return true;
     }
 }

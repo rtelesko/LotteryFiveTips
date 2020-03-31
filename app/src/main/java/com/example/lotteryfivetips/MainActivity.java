@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Check for duplicates (within one tip and for whole tips)
     private boolean validationCheck(int[][] numbers) {
-        boolean valid = true;   // Initial setting
         // Check for duplicate numbers within a tip
         for (int tip = 0; tip < MAX_TIPS; tip++) {
             for (int i = 0; i < LOTTO_NUMBERS; i++) {
